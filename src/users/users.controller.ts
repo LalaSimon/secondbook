@@ -7,11 +7,10 @@ export class UsersController {
 
   @Post()
   createUser(@Body() { email, password }: { email: string; password: string }) {
-    console.log(email, password);
     return this.userService.createUser(email, password);
   }
 
-  @Get()
+  @Get('/allUsers')
   getAllUsers() {
     return this.userService.getAllUsers();
   }
