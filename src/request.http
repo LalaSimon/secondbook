@@ -1,14 +1,36 @@
-### hello world
-POST  http://localhost:3000/users
+### Register
+POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "test12232131223@test.com",
+    "email": "test1223213122331231@test.com",
     "password": "test12321145"
 }
+
+### Login
+POST  http://localhost:3000/auth/signin
+Content-Type: application/json
+
+{
+    "email": "test1223213122331231@test.com",
+    "password": "test123dsadas21145"
+}
+
 ### Get all users
-GET http://localhost:3000/users/allUsers
+GET http://localhost:3000/auth/allUsers
 
-### Delet user
+### Get user
+GET http://localhost:3000/auth/10
 
-DELETE http://localhost:3000/users/31231
+
+### Delete user
+DELETE http://localhost:3000/auth
+
+### Update an user
+PATCH http://localhost:3000/auth/9
+Content-type: application/json
+
+{
+    "email": "szymon@gmail.com",
+    "password": "bubudsadasdabuba"
+}
