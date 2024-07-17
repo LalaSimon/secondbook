@@ -13,6 +13,16 @@ const scrypt = promisify(_scrypt);
 export class AuthService {
   constructor(private usersService: UserService) {}
 
+  async hashingPassword(password: string) {
+    const salt = randomBytes(8).toString('hex');
+
+    const hash = (await scrypt(password, salt, 32)) as Buffer;
+
+    const result = salt + '.' + hash.toString('hex');
+
+    return result;
+  }
+
   async signup(email: string, password: string) {
     const users = await this.usersService.find(email);
 
@@ -20,13 +30,9 @@ export class AuthService {
       throw new BadRequestException('email in use');
     }
 
-    const salt = randomBytes(8).toString('hex');
+    const hashedPassword = await this.hashingPassword(password);
 
-    const hash = (await scrypt(password, salt, 32)) as Buffer;
-
-    const result = salt + '.' + hash.toString('hex');
-
-    const user = await this.usersService.create(email, result);
+    const user = await this.usersService.create(email, hashedPassword);
 
     return user;
   }
