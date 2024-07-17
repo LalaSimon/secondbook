@@ -3,12 +3,14 @@ import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './users.entity';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { AuthService } from './auth.service';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(Users)
-    private readonly repo: Repository<Users>,
+    private repo: Repository<Users>,
+    private authService: AuthService,
   ) {}
 
   async findOne(id: number) {
@@ -44,8 +46,8 @@ export class UserService {
 
   async update(id: number, attrs: UpdateUserDto) {
     const user = await this.findOne(id);
-
     if (!user) throw new NotFoundException('User not found');
+    attrs.password = await this.authService.hashingPassword(attrs.password);
     Object.assign(user, attrs);
 
     return this.repo.save(user);
