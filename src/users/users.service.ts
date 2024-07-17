@@ -1,44 +1,53 @@
-import {
-  BadRequestException,
-  Injectable,
-  NotFoundException,
-} from '@nestjs/common';
+import { Injectable, NotFoundException } from '@nestjs/common';
 import { InjectRepository } from '@nestjs/typeorm';
 import { Repository } from 'typeorm';
 import { Users } from './users.entity';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 @Injectable()
 export class UserService {
   constructor(
     @InjectRepository(Users)
-    private readonly usersRepository: Repository<Users>,
+    private readonly repo: Repository<Users>,
   ) {}
 
-  async create(email: string, password: string): Promise<Users> {
-    const existingUser = await this.usersRepository.findOne({
-      where: { email },
-    });
+  async findOne(id: number) {
+    if (!id) return null;
+    return this.repo.findOne({ where: { id } });
+  }
 
-    if (!existingUser) {
-      const user = this.usersRepository.create({
-        email,
-        password,
-      });
-      return this.usersRepository.save(user);
-    } else throw new BadRequestException('User with this email already exist!');
+  async find(email: string) {
+    return this.repo.find({ where: { email } });
+  }
+
+  async create(email: string, password: string): Promise<Users> {
+    const user = this.repo.create({
+      email,
+      password,
+    });
+    return this.repo.save(user);
   }
 
   async getAll(): Promise<Users[]> {
-    return await this.usersRepository.find();
+    return await this.repo.find();
   }
 
   async delete(id: number) {
-    const exisitingUser = await this.usersRepository.findOne({
-      where: { id },
-    });
-    if (exisitingUser) {
-      await this.usersRepository.delete(exisitingUser);
-      return exisitingUser;
+    const user = await this.findOne(id);
+
+    if (user) {
+      await this.repo.remove(user);
+
+      return user;
     } else throw new NotFoundException('user not found');
+  }
+
+  async update(id: number, attrs: UpdateUserDto) {
+    const user = await this.findOne(id);
+
+    if (!user) throw new NotFoundException('User not found');
+    Object.assign(user, attrs);
+
+    return this.repo.save(user);
   }
 }
