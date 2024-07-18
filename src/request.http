@@ -27,10 +27,10 @@ GET http://localhost:3000/auth/10
 DELETE http://localhost:3000/auth
 
 ### Update an user
-PATCH http://localhost:3000/auth/9
+PATCH http://localhost:3000/auth/10
 Content-type: application/json
 
 {
-    "email": "szymon@gmail.com",
-    "password": "bubudsadasdabuba"
+    "email": "kamilo@gmail.com",
+    "password": "adskldjklasjndwqudnas"
 }

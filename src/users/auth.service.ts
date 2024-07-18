@@ -6,6 +6,7 @@ import {
 } from '@nestjs/common';
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
+import { UpdateUserDto } from './dto/update-user.dto';
 
 const scrypt = promisify(_scrypt);
 
@@ -15,12 +16,21 @@ export class AuthService {
 
   async hashingPassword(password: string) {
     const salt = randomBytes(8).toString('hex');
-
     const hash = (await scrypt(password, salt, 32)) as Buffer;
-
     const result = salt + '.' + hash.toString('hex');
-
     return result;
+  }
+
+  async updateUser(id: number, attrs: UpdateUserDto) {
+    const user = await this.usersService.findOne(id);
+    if (!user) throw new NotFoundException('User not found');
+
+    attrs.password = await this.hashingPassword(attrs.password);
+    Object.assign(user, attrs);
+
+    const updatedUser = await this.usersService.update(user);
+
+    return updatedUser;
   }
 
   async signup(email: string, password: string) {
