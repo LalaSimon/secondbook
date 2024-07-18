@@ -3,8 +3,14 @@ POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "test1223213122331231@test.com",
-    "password": "test12321145"
+    "email": "jaskol95@test.com",
+    "password": "test12321145",
+    "userAvatar": "somephoto",
+    "phoneNumber": "88271722",
+    "firstname": "Tomasz",
+    "lastname": "Jaskółka",
+    "isActive": false
+
 }
 
 ### Login
@@ -12,8 +18,8 @@ POST  http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "test1223213122331231@test.com",
-    "password": "test123dsadas21145"
+    "email": "jaskol95@test.com",
+    "password": "test12321145"
 }
 
 ### Get all users
@@ -24,7 +30,7 @@ GET http://localhost:3000/auth/10
 
 
 ### Delete user
-DELETE http://localhost:3000/auth
+DELETE http://localhost:3000/auth/19
 
 ### Update an user
 PATCH http://localhost:3000/auth/10
