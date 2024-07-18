@@ -7,6 +7,7 @@ import {
 import { randomBytes, scrypt as _scrypt } from 'crypto';
 import { promisify } from 'util';
 import { UpdateUserDto } from './dto/update-user.dto';
+import { CreateUserDto } from './dto/create-user.dto';
 
 const scrypt = promisify(_scrypt);
 
@@ -33,18 +34,19 @@ export class AuthService {
     return updatedUser;
   }
 
-  async signup(email: string, password: string) {
-    const users = await this.usersService.find(email);
+  async signup(user: CreateUserDto) {
+    const users = await this.usersService.find(user.email);
 
     if (users.length) {
       throw new BadRequestException('email in use');
     }
 
-    const hashedPassword = await this.hashingPassword(password);
+    const hashedPassword = await this.hashingPassword(user.password);
 
-    const user = await this.usersService.create(email, hashedPassword);
+    user.password = hashedPassword;
+    const newUser = await this.usersService.create(user);
 
-    return user;
+    return newUser;
   }
 
   async signin(email: string, password: string) {
