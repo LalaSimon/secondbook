@@ -30,10 +30,10 @@ GET http://localhost:3000/auth/10
 
 
 ### Delete user
-DELETE http://localhost:3000/auth/19
+DELETE http://localhost:3000/auth/2
 
 ### Update an user
-PATCH http://localhost:3000/auth/10
+PATCH http://localhost:3000/auth/3
 Content-type: application/json
 
 {

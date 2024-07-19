@@ -27,6 +27,7 @@ export class AuthService {
     if (!user) throw new NotFoundException('User not found');
 
     attrs.password = await this.hashingPassword(attrs.password);
+    attrs.modified_at = new Date().toISOString();
     Object.assign(user, attrs);
 
     const updatedUser = await this.usersService.update(user);
@@ -44,6 +45,9 @@ export class AuthService {
     const hashedPassword = await this.hashingPassword(user.password);
 
     user.password = hashedPassword;
+    user.created_at = new Date().toISOString();
+    user.modified_at = new Date().toISOString();
+
     const newUser = await this.usersService.create(user);
 
     return newUser;

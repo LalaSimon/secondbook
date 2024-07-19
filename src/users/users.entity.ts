@@ -5,13 +5,17 @@ export class Users {
   @PrimaryGeneratedColumn()
   id: number;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   userAvatar: string;
 
   @Column()
   email: string;
 
-  @Column()
+  @Column({
+    nullable: true,
+  })
   phoneNumber: string;
 
   @Column()
@@ -25,4 +29,10 @@ export class Users {
 
   @Column()
   isActive: boolean;
+
+  @Column()
+  created_at: string;
+
+  @Column()
+  modified_at: string;
 }

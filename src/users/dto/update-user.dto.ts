@@ -4,6 +4,7 @@ import {
   IsOptional,
   IsPhoneNumber,
   IsBoolean,
+  IsDate,
 } from 'class-validator';
 
 export class UpdateUserDto {
@@ -34,4 +35,7 @@ export class UpdateUserDto {
   @IsBoolean()
   @IsOptional()
   isActive: boolean;
+
+  @IsDate()
+  modified_at: string;
 }
