@@ -1,4 +1,8 @@
-import { Injectable, NotFoundException } from '@nestjs/common';
+import {
+  BadRequestException,
+  Injectable,
+  NotFoundException,
+} from '@nestjs/common';
 import { CreateBookDto } from './dto/create-book';
 import { Books } from './books.entity';
 import { InjectRepository } from '@nestjs/typeorm';
@@ -14,6 +18,10 @@ export class BooksService {
   async addBook(body: CreateBookDto) {
     if (!body) return null;
 
+    const book = await this.find(body.title);
+
+    if (book.length) throw new BadRequestException('book already in base');
+
     const newBook = this.repo.create(body);
 
     return this.repo.save(newBook);
@@ -27,6 +35,10 @@ export class BooksService {
     if (!book) {
       throw new NotFoundException('Book not found');
     } else return book;
+  }
+
+  async find(title: string) {
+    return this.repo.find({ where: { title } });
   }
 
   async findAll() {
