@@ -28,4 +28,16 @@ export class BooksService {
       throw new NotFoundException('Book not found');
     } else return book;
   }
+
+  async findAll() {
+    return this.repo.find();
+  }
+
+  async deleteBook(id: number) {
+    if (!id) return null;
+
+    const book = await this.findOne(id);
+
+    return this.repo.remove(book);
+  }
 }
