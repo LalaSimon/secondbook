@@ -1,4 +1,4 @@
-import { Body, Controller, Get, Param, Post } from '@nestjs/common';
+import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
 import { Serialize } from 'src/interceptor/serialize.interceptor';
 import { Book } from './dto/book.dto';
 import { CreateBookDto } from './dto/create-book';
@@ -17,5 +17,15 @@ export class BooksController {
   @Get('/:id')
   getBook(@Param('id') id: string) {
     return this.booksService.findOne(parseInt(id));
+  }
+
+  @Get()
+  getAllBooks() {
+    return this.booksService.findAll();
+  }
+
+  @Delete('/:id')
+  deleteBook(@Param('id') id: string) {
+    return this.booksService.deleteBook(parseInt(id));
   }
 }

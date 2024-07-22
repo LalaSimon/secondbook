@@ -14,5 +14,11 @@ Content-Type: application/json
 }
 
 ### Get book
-
 GET http://localhost:3000/books/32
+
+### Get all books
+GET http://localhost:3000/books/
+
+
+### Delete book
+DELETE  http://localhost:3000/books/3
