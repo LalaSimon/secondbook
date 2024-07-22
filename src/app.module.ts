@@ -4,6 +4,8 @@ import { AppController } from './app.controller';
 import { AppService } from './app.service';
 import { Users } from './users/users.entity';
 import { UsersModule } from './users/users.module';
+import { BooksModule } from './books/books.module';
+import { Books } from './books/books.entity';
 
 @Module({
   imports: [
@@ -14,10 +16,11 @@ import { UsersModule } from './users/users.module';
       username: 'szymonlala',
       password: 'lalapol3518',
       database: 'secondbook',
-      entities: [Users],
+      entities: [Users, Books],
       synchronize: true,
     }),
     UsersModule,
+    BooksModule,
   ],
   controllers: [AppController],
   providers: [AppService],
