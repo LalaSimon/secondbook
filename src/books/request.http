@@ -1,0 +1,14 @@
+### add book
+POST  http://localhost:3000/books/addBook
+Content-Type: application/json
+
+{
+    "title": "szachista 21 wieku",
+    "author": "jaskol",
+    "pages": "321",
+    "description": "krótki opis książki",
+    "bookCover": "somephoto",
+    "publishYear": "1995",
+    "publishingHouse": "samowydawca",
+    "type": "szachowa"
+}
