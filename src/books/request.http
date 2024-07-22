@@ -12,3 +12,7 @@ Content-Type: application/json
     "publishingHouse": "samowydawca",
     "type": "szachowa"
 }
+
+### Get book
+
+GET http://localhost:3000/books/32
