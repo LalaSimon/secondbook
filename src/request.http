@@ -3,7 +3,7 @@ POST  http://localhost:3000/auth/signup
 Content-Type: application/json
 
 {
-    "email": "jaskol95@test.com",
+    "email": "jas31223kol95@test.com",
     "password": "test12321145",
     "userAvatar": "somephoto",
     "phoneNumber": "88271722",
@@ -18,9 +18,16 @@ POST  http://localhost:3000/auth/signin
 Content-Type: application/json
 
 {
-    "email": "jaskol95@test.com",
+    "email": "jas31223kol95@test.com",
     "password": "test12321145"
 }
+
+### Who am i
+GET http://localhost:3000/auth/whoami
+
+### sign out
+POST http://localhost:3000/auth/signout
+
 
 ### Get all users
 GET http://localhost:3000/auth/allUsers
