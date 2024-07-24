@@ -75,6 +75,6 @@ export class AuthService {
   async signout(id: number) {
     const user = await this.usersService.findOne(id);
     user.isActive = false;
-    return this.updateUser(id, user);
+    return this.usersService.update(user);
   }
 }
