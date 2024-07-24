@@ -56,6 +56,7 @@ export class AuthService {
   async signin(email: string, password: string) {
     const [user] = await this.usersService.find(email);
     user.isActive = true;
+    user.lastLogin = new Date().toISOString();
     await this.usersService.update(user);
 
     if (!user) {

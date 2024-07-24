@@ -23,6 +23,9 @@ export class UserDto {
   isActive: boolean;
 
   @Expose()
+  lastLogin: Date;
+
+  @Expose()
   created_at: Date;
 
   @Expose()
