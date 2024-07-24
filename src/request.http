@@ -26,14 +26,14 @@ Content-Type: application/json
 GET http://localhost:3000/auth/whoami
 
 ### sign out
-POST http://localhost:3000/auth/signout
+POST http://localhost:3000/auth/signout/id
 
 
 ### Get all users
 GET http://localhost:3000/auth/allUsers
 
 ### Get user
-GET http://localhost:3000/auth/3
+GET http://localhost:3000/auth/5
 
 
 ### Delete user

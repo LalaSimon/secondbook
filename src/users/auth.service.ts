@@ -55,6 +55,8 @@ export class AuthService {
 
   async signin(email: string, password: string) {
     const [user] = await this.usersService.find(email);
+    user.isActive = true;
+    await this.usersService.update(user);
 
     if (!user) {
       throw new NotFoundException('User not found');
@@ -68,5 +70,11 @@ export class AuthService {
     } else {
       return user;
     }
+  }
+
+  async signout(id: number) {
+    const user = await this.usersService.findOne(id);
+    user.isActive = false;
+    return this.updateUser(id, user);
   }
 }

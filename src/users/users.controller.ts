@@ -48,9 +48,10 @@ export class UsersController {
     return user;
   }
 
-  @Post('signout')
-  signOut(@Session() session: any) {
+  @Post('signout/:id')
+  async signOut(@Param('id') id: number, @Session() session: any) {
     session.userId = null;
+    return await this.authService.signout(id);
   }
 
   @Get('/allUsers')

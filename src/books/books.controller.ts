@@ -1,11 +1,21 @@
-import { Body, Controller, Delete, Get, Param, Post } from '@nestjs/common';
+import {
+  Body,
+  Controller,
+  Delete,
+  Get,
+  Param,
+  Post,
+  UseGuards,
+} from '@nestjs/common';
 import { Serialize } from 'src/interceptor/serialize.interceptor';
 import { Book } from './dto/book.dto';
 import { CreateBookDto } from './dto/create-book';
 import { BooksService } from './books.service';
+import { AuthGuard } from 'src/guards/auth.guard';
 
 @Controller('books')
 @Serialize(Book)
+@UseGuards(AuthGuard)
 export class BooksController {
   constructor(private readonly booksService: BooksService) {}
 
