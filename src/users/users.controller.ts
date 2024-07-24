@@ -49,6 +49,7 @@ export class UsersController {
   }
 
   @Post('signout/:id')
+  @UseGuards(AuthGuard)
   async signOut(@Param('id') id: number, @Session() session: any) {
     session.userId = null;
     return await this.authService.signout(id);
@@ -69,11 +70,13 @@ export class UsersController {
   }
 
   @Delete('/:id')
+  @UseGuards(AuthGuard)
   delete(@Param('id') id: string) {
     return this.userService.delete(parseInt(id));
   }
 
   @Patch('/:id')
+  @UseGuards(AuthGuard)
   update(@Param('id') id: string, @Body() body: UpdateUserDto) {
     return this.authService.updateUser(parseInt(id), body);
   }
