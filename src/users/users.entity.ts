@@ -30,6 +30,11 @@ export class Users {
   @Column()
   isActive: boolean;
 
+  @Column({
+    nullable: true,
+  })
+  lastLogin: string;
+
   @Column()
   created_at: string;
 

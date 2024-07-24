@@ -37,5 +37,9 @@ export class UpdateUserDto {
   isActive: boolean;
 
   @IsDate()
+  @IsOptional()
+  lastLogin: string;
+
+  @IsDate()
   modified_at: string;
 }
