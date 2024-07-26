@@ -7,7 +7,7 @@ import {
   Post,
   UseGuards,
 } from '@nestjs/common';
-import { Serialize } from 'src/interceptor/serialize.interceptor';
+import { Serialize } from 'src/interceptors/serialize.interceptor';
 import { Book } from './dto/book.dto';
 import { CreateBookDto } from './dto/create-book';
 import { BooksService } from './books.service';

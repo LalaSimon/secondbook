@@ -1,4 +1,12 @@
-import { Entity, PrimaryGeneratedColumn, Column } from 'typeorm';
+import { Offers } from 'src/offers/offers.entity';
+import {
+  Entity,
+  PrimaryGeneratedColumn,
+  Column,
+  OneToMany,
+  ManyToMany,
+  JoinTable,
+} from 'typeorm';
 
 @Entity()
 export class Users {
@@ -40,4 +48,11 @@ export class Users {
 
   @Column()
   modified_at: string;
+
+  @OneToMany(() => Offers, (offer) => offer.id)
+  offers_created: Offers[];
+
+  @ManyToMany(() => Offers)
+  @JoinTable()
+  offers_send: Offers[];
 }
