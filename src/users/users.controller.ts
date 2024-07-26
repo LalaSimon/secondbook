@@ -12,7 +12,7 @@ import {
 } from '@nestjs/common';
 import { UserService } from './users.service';
 import { CreateUserDto } from './dto/create-user.dto';
-import { Serialize } from '../interceptor/serialize.interceptor';
+import { Serialize } from '../interceptors/serialize.interceptor';
 import { UserDto } from './dto/user.dto';
 import { UpdateUserDto } from './dto/update-user.dto';
 import { AuthService } from './auth.service';
